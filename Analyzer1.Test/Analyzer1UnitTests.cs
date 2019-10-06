@@ -71,12 +71,12 @@ namespace Analyzer1.Test
 
         protected override CodeFixProvider GetCSharpCodeFixProvider()
         {
-            return new Analyzer1CodeFixProvider();
+            return new StringConcatConversionCodeFixProvider();
         }
 
         protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer()
         {
-            return new Analyzer1Analyzer();
+            return new StringConcatConversionAnalyzer();
         }
     }
 }

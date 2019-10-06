@@ -1,18 +1,14 @@
-using System;
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.Diagnostics;
+using Microsoft.CodeAnalysis.Operations;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
-using System.Threading;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Diagnostics;
-using Microsoft.CodeAnalysis.Operations;
 
 namespace Analyzer1
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class Analyzer1Analyzer : DiagnosticAnalyzer
+    public class StringConcatConversionAnalyzer : DiagnosticAnalyzer
     {
         public const string DiagnosticId = "StringConcatConversion";
 

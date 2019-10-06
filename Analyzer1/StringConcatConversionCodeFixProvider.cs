@@ -1,32 +1,27 @@
+using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CodeActions;
+using Microsoft.CodeAnalysis.CodeFixes;
+using Microsoft.CodeAnalysis.Editing;
+using Microsoft.CodeAnalysis.Host;
+using Microsoft.CodeAnalysis.Text;
 using System;
-using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
 using System.Linq;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.CodeFixes;
-using Microsoft.CodeAnalysis.CodeActions;
-using Microsoft.CodeAnalysis.CSharp;
-using Microsoft.CodeAnalysis.CSharp.Syntax;
-using Microsoft.CodeAnalysis.Rename;
-using Microsoft.CodeAnalysis.Text;
-using Microsoft.CodeAnalysis.Operations;
-using Microsoft.CodeAnalysis.Editing;
-using System.Reflection;
-using Microsoft.CodeAnalysis.Host;
 
 namespace Analyzer1
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(Analyzer1CodeFixProvider)), Shared]
-    public class Analyzer1CodeFixProvider : CodeFixProvider
+    [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(StringConcatConversionCodeFixProvider)), Shared]
+    public class StringConcatConversionCodeFixProvider : CodeFixProvider
     {
         private const string title = "Call ToString(CultureInfo.InvarientCulture)";
 
         static readonly Func<Document, CancellationToken, Task<Document>> sAddImportsAsync;
 
-        static Analyzer1CodeFixProvider()
+        static StringConcatConversionCodeFixProvider()
         {
             var workspaceModule = typeof(ExtensionOrderAttribute).Module;
 
@@ -65,7 +60,7 @@ namespace Analyzer1
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(Analyzer1Analyzer.DiagnosticId); }
+            get { return ImmutableArray.Create(StringConcatConversionAnalyzer.DiagnosticId); }
         }
 
         public sealed override FixAllProvider GetFixAllProvider()
