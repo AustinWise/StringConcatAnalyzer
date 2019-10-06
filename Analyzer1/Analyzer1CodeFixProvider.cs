@@ -12,13 +12,15 @@ using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Rename;
 using Microsoft.CodeAnalysis.Text;
+using Microsoft.CodeAnalysis.Operations;
+using Microsoft.CodeAnalysis.Editing;
 
 namespace Analyzer1
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(Analyzer1CodeFixProvider)), Shared]
     public class Analyzer1CodeFixProvider : CodeFixProvider
     {
-        private const string title = "Make uppercase";
+        private const string title = "Call ToString(CultureInfo.InvarientCulture)";
 
         public sealed override ImmutableArray<string> FixableDiagnosticIds
         {
@@ -31,43 +33,47 @@ namespace Analyzer1
             return WellKnownFixAllProviders.BatchFixer;
         }
 
-        public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
+        public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
-
-            // TODO: Replace the following code with your own analysis, generating a CodeAction for each fix to suggest
-            var diagnostic = context.Diagnostics.First();
-            var diagnosticSpan = diagnostic.Location.SourceSpan;
-
-            // Find the type declaration identified by the diagnostic.
-            var declaration = root.FindToken(diagnosticSpan.Start).Parent.AncestorsAndSelf().OfType<TypeDeclarationSyntax>().First();
+            var diagnostic = context.Diagnostics.FirstOrDefault();
+            if (diagnostic == null)
+            {
+                return Task.CompletedTask;
+            }
 
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
                     title: title,
-                    createChangedSolution: c => MakeUppercaseAsync(context.Document, declaration, c),
+                    createChangedDocument: c => MakeUppercaseAsync(context.Document, context.Span, c),
                     equivalenceKey: title),
                 diagnostic);
+
+            return Task.CompletedTask;
         }
 
-        private async Task<Solution> MakeUppercaseAsync(Document document, TypeDeclarationSyntax typeDecl, CancellationToken cancellationToken)
+        private async Task<Document> MakeUppercaseAsync(Document document, TextSpan span, CancellationToken cancellationToken)
         {
-            // Compute new uppercase name.
-            var identifierToken = typeDecl.Identifier;
-            var newName = identifierToken.Text.ToUpperInvariant();
+            var root = await document.GetSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var conversionNode = root.FindNode(span, getInnermostNodeForTie: true);
+            if (conversionNode == null)
+            {
+                return document;
+            }
 
-            // Get the symbol representing the type to be renamed.
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken);
-            var typeSymbol = semanticModel.GetDeclaredSymbol(typeDecl, cancellationToken);
+            DocumentEditor editor = await DocumentEditor.CreateAsync(document, cancellationToken).ConfigureAwait(false);
+            SyntaxGenerator generator = editor.Generator;
 
-            // Produce a new solution that has all references to that type renamed, including the declaration.
-            var originalSolution = document.Project.Solution;
-            var optionSet = originalSolution.Workspace.Options;
-            var newSolution = await Renamer.RenameSymbolAsync(document.Project.Solution, typeSymbol, newName, optionSet, cancellationToken).ConfigureAwait(false);
+            var cultureInfoType = editor.SemanticModel.Compilation.GetTypeByMetadataName("System.Globalization.CultureInfo");
 
-            // Return the new solution with the now-uppercase type name.
-            return newSolution;
+            var toStringAccess = generator.MemberAccessExpression(conversionNode, "ToString");
+            var cultureInfoTypeExpr = generator.TypeExpression(cultureInfoType, addImport: true);
+            var invarientCultureExpr = generator.MemberAccessExpression(cultureInfoTypeExpr, "InvariantCulture");
+            var toStringInvoke = generator.InvocationExpression(toStringAccess, invarientCultureExpr);
+
+            editor.ReplaceNode(conversionNode, toStringInvoke);
+
+            return editor.GetChangedDocument();
         }
     }
 }

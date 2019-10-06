@@ -36,7 +36,8 @@ namespace Analyzer1
             {
                 var iformatProviderType = csaContext.Compilation.GetTypeByMetadataName("System.IFormatProvider");
                 var cultureInfoType = csaContext.Compilation.GetTypeByMetadataName("System.Globalization.CultureInfo");
-                if (iformatProviderType == null || cultureInfoType == null)
+                var invariantCultureProperty = cultureInfoType?.GetMembers("InvariantCulture").OfType<IPropertySymbol>().FirstOrDefault();
+                if (iformatProviderType == null || cultureInfoType == null || invariantCultureProperty == null)
                 {
                     return;
                 }
@@ -45,7 +46,6 @@ namespace Analyzer1
                 var stringType = csaContext.Compilation.GetSpecialType(SpecialType.System_String);
                 var obsoleteAttributeType = csaContext.Compilation.GetTypeByMetadataName(typeof(System.ObsoleteAttribute).FullName);
 
-                var invariantCultureProperty = cultureInfoType.GetMembers("InvariantCulture").OfType<IPropertySymbol>().FirstOrDefault();
 
                 csaContext.RegisterOperationAction(oaContext =>
                 {
