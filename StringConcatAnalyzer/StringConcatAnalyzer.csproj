@@ -7,18 +7,15 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <PackageId>Analyzer1</PackageId>
+    <PackageId>Austin.StringConcatAnalyzer</PackageId>
     <PackageVersion>1.0.0.0</PackageVersion>
     <Authors>AustinWise</Authors>
-    <PackageLicenseUrl>http://LICENSE_URL_HERE_OR_DELETE_THIS_LINE</PackageLicenseUrl>
-    <PackageProjectUrl>http://PROJECT_URL_HERE_OR_DELETE_THIS_LINE</PackageProjectUrl>
-    <PackageIconUrl>http://ICON_URL_HERE_OR_DELETE_THIS_LINE</PackageIconUrl>
-    <RepositoryUrl>http://REPOSITORY_URL_HERE_OR_DELETE_THIS_LINE</RepositoryUrl>
+    <PackageLicenseUrl>https://github.com/AustinWise/StringConcatAnalyzer/blob/master/LICENSE.TXT</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/AustinWise/StringConcatAnalyzer</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/AustinWise/StringConcatAnalyzer.git</RepositoryUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
-    <Description>Analyzer1</Description>
-    <PackageReleaseNotes>Summary of changes made in this release of the package.</PackageReleaseNotes>
-    <Copyright>Copyright</Copyright>
-    <PackageTags>Analyzer1, analyzers</PackageTags>
+    <Description>Checks for FxCop CA1305 globalization errors when doing string concat with implicit conversion.</Description>
+    <Copyright>Copyright Austin WIse</Copyright>
     <NoPackageAnalysis>true</NoPackageAnalysis>
   </PropertyGroup>
 

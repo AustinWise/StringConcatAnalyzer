@@ -16,7 +16,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Analyzer1\Analyzer1.csproj" />
+    <ProjectReference Include="..\StringConcatAnalyzer\StringConcatAnalyzer.csproj" />
   </ItemGroup>
 
 </Project>

@@ -16,8 +16,8 @@
     <ProjectGuid>{4157D8F6-6ABC-42EA-B9FF-4CF6C3A1F7D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Analyzer1.Vsix</RootNamespace>
-    <AssemblyName>Analyzer1</AssemblyName>
+    <RootNamespace>StringConcatAnalyzer.Vsix</RootNamespace>
+    <AssemblyName>StringConcatAnalyzer</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <GeneratePkgDefFile>false</GeneratePkgDefFile>
     <IncludeAssemblyInVSIXContainer>false</IncludeAssemblyInVSIXContainer>
@@ -55,7 +55,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Analyzer1\Analyzer1.csproj">
+    <ProjectReference Include="..\StringConcatAnalyzer\StringConcatAnalyzer.csproj">
       <Project>{706BC505-33A7-4D1C-9D9C-78D9C1A9CEB7}</Project>
       <Name>Analyzer1</Name>
     </ProjectReference>

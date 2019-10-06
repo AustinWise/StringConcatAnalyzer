@@ -3,11 +3,11 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29326.143
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyzer1", "Analyzer1\Analyzer1.csproj", "{706BC505-33A7-4D1C-9D9C-78D9C1A9CEB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringConcatAnalyzer", "StringConcatAnalyzer\StringConcatAnalyzer.csproj", "{706BC505-33A7-4D1C-9D9C-78D9C1A9CEB7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyzer1.Test", "Analyzer1.Test\Analyzer1.Test.csproj", "{21928E6E-9AF2-4AE0-B47A-142E1C1637AF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringConcatAnalyzer.Test", "StringConcatAnalyzer.Test\StringConcatAnalyzer.Test.csproj", "{21928E6E-9AF2-4AE0-B47A-142E1C1637AF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analyzer1.Vsix", "Analyzer1.Vsix\Analyzer1.Vsix.csproj", "{4157D8F6-6ABC-42EA-B9FF-4CF6C3A1F7D3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StringConcatAnalyzer.Vsix", "StringConcatAnalyzer.Vsix\StringConcatAnalyzer.Vsix.csproj", "{4157D8F6-6ABC-42EA-B9FF-4CF6C3A1F7D3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
