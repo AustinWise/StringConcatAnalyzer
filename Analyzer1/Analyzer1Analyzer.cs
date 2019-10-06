@@ -53,8 +53,20 @@ namespace Analyzer1
                     if (!op.IsImplicit || !op.Conversion.Exists || !(op.Type.Equals(objectType) || op.Type.Equals(stringType)))
                         return;
 
-                    if (!(op.Parent is IBinaryOperation parentBinOp) || parentBinOp.OperatorKind != BinaryOperatorKind.Add || !parentBinOp.Type.Equals(stringType))
+                    if (op.Parent is IBinaryOperation parentBinOp)
+                    {
+                        if (parentBinOp.OperatorKind != BinaryOperatorKind.Add || !parentBinOp.Type.Equals(stringType))
+                            return;
+                    }
+                    else if (op.Parent is ICompoundAssignmentOperation compoundOp)
+                    {
+                        if (compoundOp.OperatorKind != BinaryOperatorKind.Add || !compoundOp.Type.Equals(stringType))
+                            return;
+                    }
+                    else
+                    {
                         return;
+                    }
 
                     IEnumerable<IMethodSymbol> canidateToStringMethods =
                         op.Operand.Type.GetMembers("ToString")
