@@ -61,7 +61,7 @@ namespace StringConcatAnalyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use invarient culture when converting to string as part of a string concatenation..
+        ///   Looks up a localized string similar to Use invariant culture when converting to string as part of a string concatenation..
         /// </summary>
         internal static string AnalyzerDescription {
             get {
@@ -79,7 +79,7 @@ namespace StringConcatAnalyzer {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Use invarient culture when converting to string..
+        ///   Looks up a localized string similar to Use invariant culture when converting to string..
         /// </summary>
         internal static string AnalyzerTitle {
             get {

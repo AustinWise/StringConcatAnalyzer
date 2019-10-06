@@ -17,7 +17,7 @@ namespace StringConcatAnalyzer
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(StringConcatConversionCodeFixProvider)), Shared]
     public class StringConcatConversionCodeFixProvider : CodeFixProvider
     {
-        private const string title = "Call ToString(CultureInfo.InvarientCulture)";
+        private const string Title = "Call ToString(CultureInfo.InvariantCulture)";
 
         static readonly Func<Document, CancellationToken, Task<Document>> sAddImportsAsync;
 
@@ -80,9 +80,9 @@ namespace StringConcatAnalyzer
             // Register a code action that will invoke the fix.
             context.RegisterCodeFix(
                 CodeAction.Create(
-                    title: title,
+                    title: Title,
                     createChangedDocument: c => MakeUppercaseAsync(context.Document, context.Span, c),
-                    equivalenceKey: title),
+                    equivalenceKey: Title),
                 diagnostic);
 
             return Task.CompletedTask;
