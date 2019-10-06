@@ -12,7 +12,7 @@ using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace Analyzer1
+namespace StringConcatAnalyzer
 {
     [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(StringConcatConversionCodeFixProvider)), Shared]
     public class StringConcatConversionCodeFixProvider : CodeFixProvider

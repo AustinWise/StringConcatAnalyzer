@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Linq;
 
-namespace Analyzer1
+namespace StringConcatAnalyzer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class StringConcatConversionAnalyzer : DiagnosticAnalyzer

@@ -2,11 +2,9 @@ using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CodeFixes;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
 using TestHelper;
-using Analyzer1;
 
-namespace Analyzer1.Test
+namespace StringConcatAnalyzer.Test
 {
     [TestClass]
     public class StringConcatConversionUnitTest : CodeFixVerifier
