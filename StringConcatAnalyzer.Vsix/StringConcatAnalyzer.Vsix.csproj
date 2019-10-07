@@ -57,7 +57,9 @@
   <ItemGroup>
     <ProjectReference Include="..\StringConcatAnalyzer\StringConcatAnalyzer.csproj">
       <Project>{706BC505-33A7-4D1C-9D9C-78D9C1A9CEB7}</Project>
-      <Name>Analyzer1</Name>
+      <Name>StringConcatAnalyzer</Name>
+      <IncludeOutputGroupsInVSIX>BuiltProjectOutputGroup%3bBuiltProjectOutputGroupDependencies%3bGetCopyToOutputDirectoryItems%3bSatelliteDllsProjectOutputGroup%3b</IncludeOutputGroupsInVSIX>
+      <IncludeOutputGroupsInVSIXLocalOnly>DebugSymbolsProjectOutputGroup%3b</IncludeOutputGroupsInVSIXLocalOnly>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
